@@ -61,7 +61,8 @@
 </details>
 
 
-
+## Planlanan flowchart
+![Planlanan flowchart](https://i.hizliresim.com/sjqvatf.png)
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
