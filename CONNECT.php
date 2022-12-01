@@ -1,6 +1,6 @@
 <?php	
 header('Content-Type: text/html; charset=utf-8');
-$servername = "192.168.0.27";
+$servername = "192.168.0.";
 $username = "dev";
 $password = "";
 try {
