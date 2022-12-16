@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <?php session_start(); /* Starts the session */
-        /* Check Login form submitted */        
+        /* Check Login form submitted */  
+		/* kullanıcı ekleme yok,henüz kullancıılar veri tabanında değil */  
+
         if(isset($_POST['Submit'])){
+				$Password = isset($_POST['Password']) ? $_POST['Password'] : '';
+				$Username = isset($_POST['Username']) ? $_POST['Username'] : '';   
+				$logins = array('ecem' => '$2y$10$haQ2BPqJG3oYEgTFCvU0Yuc6DFn4.geYTEm7DxakfGLvxyhK17xQa','username1' => '$2y$10$z6Ra9zkkIo6kAbCgGummteeu9Mj/vcigdnPyTrHZ8blMykD/i75me','username2' => '$2y$10$dIJz6BFhos0A0faf9zgOpei47bSzt5gnDE4VYSTOWh2BoBFlcevQi');
+				
+				$verify = password_verify($Password, $logins[$Username]);
                 /* Define username and associated password array */
-                $logins = array('ecem' => 'ee','username1' => 'password1','username2' => 'password2');
-                /* Check and assign submitted Username and Password to new variable */
-                $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
-                $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
                 
+                /* Check and assign submitted Username and Password to new variable */
+                       
                 /* Check Username and Password existence in defined array */            
-                if (isset($logins[$Username]) && $logins[$Username] == $Password){
+                if (isset($logins[$Username]) && $verify){
                         /* Success: Set session variables and redirect to Protected page  */
                         $_SESSION['UserData']['Username']=$logins[$Username];
                         header("location:bs_deneme.php");
@@ -17,8 +22,7 @@
                 } 
 				else {
                         /*Unsuccessful attempt: Set error message */
-                        $msg="<span style='color:red'>Kullanıcı adı veya şifre yanlış.</span>";
-	
+                        $msg="<span style='color:red'>Kullanıcı adı veya şifre yanlış.</span>";	
                 }
         }
 ?>
@@ -62,11 +66,10 @@
                                         <div class="form-group">
                                             <input name="Password" type="password" class="form-control form-control-user"
                                                  placeholder="Şifre">
-                                        </div>
-										
+                                        </div>										
     <?php if(isset($msg))
 	echo $msg; ?>
-										<td><input name="Submit" type="submit" value="Login" class="btn btn-primary btn-user btn-block"></td>
+										<td><input name="Submit" type="submit" value="Giriş yap" class="btn btn-primary btn-user btn-block"></td>
                                     </form>
                             </div>
                         </div>
